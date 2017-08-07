@@ -20,11 +20,11 @@ set(HEADERS
     include/guiadapter.h
     include/controlers/registrationcontroler.h
     include/controlers/logincontroler.h
-    include/chats_filter_proxy_model.h
-    include/chats_model.h
-    include/contacts_model.h
-    include/messages_model.h
-    include/models_elements.h
+    include/models/chats_filter_proxy_model.h
+    include/models/chats_model.h
+    include/models/contacts_model.h
+    include/models/messages_model.h
+    include/models/models_elements.h
     )
 
 set(SOURCES
@@ -33,11 +33,11 @@ set(SOURCES
     src/guiadapter.cpp
     src/controlers/registrationcontroler.cpp
     src/controlers/logincontroler.cpp
-    src/chats_filter_proxy_model.cpp
-    src/chats_model.cpp
-    src/contacts_model.cpp
-    src/messages_model.cpp
-    src/models_elements.cpp
+    src/models/chats_filter_proxy_model.cpp
+    src/models/chats_model.cpp
+    src/models/contacts_model.cpp
+    src/models/messages_model.cpp
+    src/models/models_elements.cpp
     )
 
 qt5_add_resources(RESOURCES application.qrc)
