@@ -17,7 +17,6 @@ Page {
                 text: qsTr("‹")
                 font.bold: true
                 font.pointSize: toolBar.fontSize
-//                onClicked: stackView.pop()
                 onClicked: rightside.pop()
             }
             Label {

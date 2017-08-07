@@ -9,7 +9,7 @@ ApplicationWindow {
     StackView {
         id: stackView
         anchors.fill: parent
-        initialItem: RegisterPage {}
+        initialItem: LoginPage {}
 
         onCurrentItemChanged: {
             window.minimumHeight = stackView.currentItem.implicitHeight
