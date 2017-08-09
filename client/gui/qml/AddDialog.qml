@@ -1,5 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
+import "."
 
 Rectangle {
     id: adding
@@ -82,7 +83,7 @@ Rectangle {
         id: dialog
         width: 300
         height: 300
-        color: "#ffffff"
+        color: Style.mainBackground
         anchors.centerIn: adding
         radius: 10
 
@@ -120,7 +121,7 @@ Rectangle {
             background: Rectangle {
                 radius: 5
                 border.width: 0
-                color: parent.hovered ? "#a0dea0" : "white"
+                color: parent.hovered ? Style.hover : Style.mainBackground
             }
 
             onClicked: {
@@ -142,7 +143,7 @@ Rectangle {
             background: Rectangle {
                 radius: 5
                 border.width: 0
-                color: parent.hovered ? "#a0dea0" : "white"
+                color: parent.hovered ? Style.hover : Style.mainBackground
             }
 
             onClicked: {

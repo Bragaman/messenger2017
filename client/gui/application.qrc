@@ -23,5 +23,8 @@
         <file>qml/LoginPage.qml</file>
         <file>qml/RectangleLogo.qml</file>
         <file>qml/PageWithLogo.qml</file>
+        <file>qml/ContactListDelegateItem.qml</file>
+        <file>qml/qmldir</file>
+        <file>qml/Style.qml</file>
     </qresource>
 </RCC>

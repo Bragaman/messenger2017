@@ -1,5 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
+import "."
 
 Page {
     id: root
@@ -11,6 +12,10 @@ Page {
         width: 50
         height: 50
         source: "/demo/ava.jpg"
+    }
+
+    background: Rectangle{
+        color: Style.mainBackground
     }
 
     Text {
@@ -57,7 +62,7 @@ Page {
 
         background: Rectangle {
             radius: 10
-            color: parent.hovered ? "#a0dea0" : "white"
+            color: parent.hovered ? Style.hover : Style.mainBackground
         }
 
         contentItem: Image {
@@ -66,7 +71,6 @@ Page {
         }
 
         onClicked: {
-            //stackView.push("qrc:/qml/SettingsPage.qml")
             rightside.push("qrc:/qml/SettingsPage.qml")
         }
     }

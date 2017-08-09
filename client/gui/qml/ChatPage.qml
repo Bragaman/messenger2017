@@ -4,6 +4,9 @@ import QtQuick.Layouts 1.3
 
 Page {
     id: chatPage
+    background: Rectangle{
+        color: Style.chatBackground
+    }
 
     ColumnLayout {
         anchors.fill: parent
@@ -12,6 +15,10 @@ Page {
             Layout.preferredHeight: 75
             Layout.fillWidth: true
             z: 2
+
+            background: Rectangle{
+                color: Style.mainBackground
+            }
 
             RowLayout {
                 id: topLayout
@@ -63,7 +70,7 @@ Page {
 
                     background: Rectangle {
                         radius: 10
-                        color: parent.hovered ? "#a0dea0" : "white"
+                        color: parent.hovered ? Style.hover : Style.mainBackground
                     }
 
                     text: "⋮"
@@ -73,7 +80,7 @@ Page {
             }
             Rectangle {
                 id: split_right_chat
-                color: "lightGray"
+                color: Style.splitColor
                 height: 1
                 width: parent.width
                 anchors.top: topLayout.bottom
@@ -99,7 +106,7 @@ Page {
 
         Rectangle {
             id: split_footer_chat
-            color: "lightGray"
+            color: Style.splitColor
             height: 1
             Layout.fillWidth: true
             anchors.bottom: footer_chat.top
@@ -108,6 +115,10 @@ Page {
         Page {
             id: footer_chat
             Layout.fillWidth: true
+
+            background: Rectangle{
+                color: Style.mainBackground
+            }
 
             RowLayout {
                 id: bottomLayout
@@ -127,7 +138,7 @@ Page {
                     background: Rectangle {
                         radius: 10
 
-                        color: parent.hovered ? "#a0dea0" : "white"
+                        color: parent.hovered ? Style.hover : Style.mainBackground
                     }
 
                     contentItem: Image {
@@ -167,7 +178,7 @@ Page {
                     background: Rectangle {
                         radius: 10
 
-                        color: parent.hovered ? "#a0dea0" : "white"
+                        color: parent.hovered ? Style.hover : Style.mainBackground
                     }
 
                     contentItem: Image {

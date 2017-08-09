@@ -1,5 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
+import "."
 
 Page {
     id: mainpage
@@ -17,7 +18,7 @@ Page {
 
         Rectangle {
             id: split_left
-            color: "lightGray"
+            color: Style.splitColor
             height: 1
             width: parent.width
             anchors.top: info.bottom
@@ -36,7 +37,7 @@ Page {
 
     Rectangle {
         id: split_center
-        color: "lightGray"
+        color: Style.splitColor
         width: 1
         height: parent.height
 
@@ -56,6 +57,9 @@ Page {
             Label {
                 text: "Выберите чат"
                 anchors.centerIn: parent
+            }
+            background: Rectangle{
+                color: Style.mainBackground
             }
         }
 
@@ -84,14 +88,6 @@ Page {
             state = "";
         }
     }
-
-//    ChatPage {
-//        id: rightside
-//        height: parent.height
-//        implicitWidth: 300
-//        anchors.left: split_center.right
-//        anchors.right: parent.right
-//    }
 
     AddDialog {
         id: adding
