@@ -13,7 +13,6 @@ Page {
         implicitWidth: info.implicitWidth
         Info {
             id: info
-
         }
 
         Rectangle {
@@ -32,6 +31,13 @@ Page {
             width: 300
             anchors.top: split_left.bottom
             height: parent.height - info.height - 1
+        }
+        SettingsPage {
+            id: settings
+            z: -1
+            anchors.top: split_left.bottom
+            height: parent.height - info.height - 1
+            visible: false
         }
     }
 
@@ -56,36 +62,36 @@ Page {
         initialItem: Page {
             Label {
                 text: "Выберите чат"
+                color: Style.textColor
                 anchors.centerIn: parent
             }
-            background: Rectangle{
+            background: Rectangle {
                 color: Style.mainBackground
             }
         }
 
-        states: State{
-                name: "noAnimation"
-                PropertyChanges {
-                    target: animation
-                    duration: 0
-                }
-
+        states: State {
+            name: "noAnimation"
+            PropertyChanges {
+                target: animation
+                duration: 0
             }
+        }
 
         pushEnter: Transition {
-                XAnimator {
-                    id: animation
-                    from: (rightside.mirrored ? 1 : -1) * -rightside.width
-                    to: 0
-                    duration: 400
-                    easing.type: Easing.OutCubic
-                }
+            XAnimator {
+                id: animation
+                from: (rightside.mirrored ? 1 : -1) * -rightside.width
+                to: 0
+                duration: 400
+                easing.type: Easing.OutCubic
             }
+        }
 
-        function pushNoAnimation(item){
-            state = "noAnimation";
-            push(item);
-            state = "";
+        function pushNoAnimation(item) {
+            state = "noAnimation"
+            push(item)
+            state = ""
         }
     }
 

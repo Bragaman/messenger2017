@@ -26,5 +26,8 @@
         <file>qml/ContactListDelegateItem.qml</file>
         <file>qml/qmldir</file>
         <file>qml/Style.qml</file>
+        <file>qml/SettingsListDelegateItem.qml</file>
+        <file>img/arrow.png</file>
+        <file>img/chats.png</file>
     </qresource>
 </RCC>

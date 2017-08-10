@@ -1,11 +1,12 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
+import QtGraphicalEffects 1.0
 
 Page {
     id: chatPage
-    background: Rectangle{
-        color: Style.chatBackground
+    background: Rectangle {
+        color: Style.mainBackground
     }
 
     ColumnLayout {
@@ -16,7 +17,7 @@ Page {
             Layout.fillWidth: true
             z: 2
 
-            background: Rectangle{
+            background: Rectangle {
                 color: Style.mainBackground
             }
 
@@ -51,6 +52,7 @@ Page {
                     Layout.maximumHeight: 50
 
                     text: "Eba"
+                    color: Style.textColor
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignLeft
 
@@ -73,9 +75,14 @@ Page {
                         color: parent.hovered ? Style.hover : Style.mainBackground
                     }
 
-                    text: "⋮"
-                    font.pixelSize: 22
-                    font.bold: true
+                    contentItem: Text {
+                        text: "⋮"
+                        color: Style.buttonColor
+                        font.pixelSize: 22
+                        font.bold: true
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
                 }
             }
             Rectangle {
@@ -87,8 +94,8 @@ Page {
             }
         }
 
-        /////////////////////////////////////////////////////////////////////
 
+        /////////////////////////////////////////////////////////////////////
         ChatListView {
             id: chatListView
 
@@ -102,8 +109,8 @@ Page {
             }
         }
 
-        //////////////////////////////////////////////////////////////////////
 
+        //////////////////////////////////////////////////////////////////////
         Rectangle {
             id: split_footer_chat
             color: Style.splitColor
@@ -116,7 +123,7 @@ Page {
             id: footer_chat
             Layout.fillWidth: true
 
-            background: Rectangle{
+            background: Rectangle {
                 color: Style.mainBackground
             }
 
@@ -144,6 +151,12 @@ Page {
                     contentItem: Image {
                         id: affiximg
                         source: "/img/affix.png"
+                    }
+
+                    ColorOverlay {
+                        anchors.fill: affiximg
+                        source: affiximg
+                        color: Style.buttonColor
                     }
                 }
 
@@ -184,6 +197,12 @@ Page {
                     contentItem: Image {
                         id: sendimg
                         source: "/img/send.png"
+                    }
+
+                    ColorOverlay {
+                        anchors.fill: sendimg
+                        source: sendimg
+                        color: Style.buttonColor
                     }
 
                     onClicked: {

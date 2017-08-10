@@ -94,6 +94,7 @@ Rectangle {
 
         Text {
             id: title
+            color: Style.textColor
             font.pointSize: 20
             text: qsTr("Добавить пользователя")
             anchors.horizontalCenter: parent.horizontalCenter
@@ -111,7 +112,13 @@ Rectangle {
             id: cancel_button
             width: 130
             height: 40
-            text: qsTr("Отмена")
+
+            contentItem: Text {
+                text: qsTr("Отмена")
+                color: Style.buttonColor
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+            }
 
             anchors.left: parent.left
             anchors.leftMargin: 12
@@ -133,7 +140,13 @@ Rectangle {
             id: add_button
             width: 130
             height: 40
-            text: qsTr("Добавить")
+
+            contentItem: Text {
+                text: qsTr("Добавить")
+                color: Style.buttonColor
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+            }
 
             anchors.right: parent.right
             anchors.rightMargin: 12
@@ -157,6 +170,7 @@ Rectangle {
             anchors.bottomMargin: 5
 
             text: qsTr("Введите GUID пользователя:")
+            color: Style.textColor
             font.pixelSize: 15
         }
 

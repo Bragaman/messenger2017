@@ -1,5 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
+import QtGraphicalEffects 1.0
 import "."
 
 Page {
@@ -14,7 +15,7 @@ Page {
         source: "/demo/ava.jpg"
     }
 
-    background: Rectangle{
+    background: Rectangle {
         color: Style.mainBackground
     }
 
@@ -22,6 +23,7 @@ Page {
         id: text_name
         text: qsTr("Владимир Пряхин")
         font.pixelSize: 20
+        color: Style.textColor
 
         anchors.left: avatar.right
         anchors.leftMargin: 10
@@ -69,9 +71,24 @@ Page {
             id: setimg
             source: "/img/settings.png"
         }
+        ColorOverlay {
+            anchors.fill: setimg
+            source: setimg
+            color: Style.buttonColor
+        }
 
         onClicked: {
-            rightside.push("qrc:/qml/SettingsPage.qml")
+            if (settings.visible) {
+                contacts.visible = true
+                settings.visible = false
+                setimg.source = "/img/settings.png"
+            } else {
+                contacts.visible = false
+                settings.visible = true
+                setimg.source = "/img/chats.png"
+            }
+
+            //            rightside.push("qrc:/qml/SettingsPage.qml")
         }
     }
 }
