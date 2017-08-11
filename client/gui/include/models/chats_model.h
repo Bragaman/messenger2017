@@ -14,34 +14,33 @@ class ChatsModel : public QAbstractListModel
 
 public:
     enum ChatDataRoles {
-        chatID = Qt::UserRole + 1,
-        name,
-        avatar,
-        lastMessageGuid,
-        lastMessageText,
-        lastMessageTime,
-        unreadable
+        ChatID = Qt::UserRole + 1,
+        Name,
+        Avatar,
+        LastMessageGuid,
+        LastMessageText,
+        LastMessageTime,
+        Unreadable
     };
 
     ChatsModel(QObject *parent = 0);
 
 
-    Q_INVOKABLE void addNewChat(const QString& ID, const QString &name, QString avatar = QString());
-    Q_INVOKABLE void deleteChat(const QString& ID);
-    Q_INVOKABLE void updateChat(const QString& ID, const ModelsElements::MessageData mess);
-    Q_INVOKABLE void clearChatUnread(const QString& ID);
-    Q_INVOKABLE void loadChatList();    //TODO: заглушка
+    void addNewChat(const QString& ID, const QString &Name, QString Avatar = QString());
+    void deleteChat(const QString& ID);
+    void updateChatMessage(const QString& ID, const ModelsElements::MessageData mess);
+    void clearChatUnread(const QString& ID);
+
+    void loadChatList(QHash<QString, ModelsElements::ChatData> &chatList);
 
     virtual int rowCount(const QModelIndex &parent) const;
     virtual QVariant data(const QModelIndex &index, int role) const;
     virtual QHash<int, QByteArray> roleNames() const;
-    virtual bool setData(const QModelIndex &index, const QVariant &value, int role);
 
 private:
-    int getChatByID(const QString& ID);
+    ModelsElements::ChatData* getChatByID(const QString& ID);
 
-    QVector <ModelsElements::ChatData> itemList;
-
+    QHash <QString, ModelsElements::ChatData> itemList;
 };
 
 #endif // CHAT_MESSAGES_MODEL_H

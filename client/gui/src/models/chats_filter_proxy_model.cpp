@@ -24,7 +24,7 @@ void ChatsFilterProxyModel::deleteChat(const QString& ID)
 
 void ChatsFilterProxyModel::updateChat(const QString& ID, const MessageData mess)
 {
-    model->updateChat(ID, mess);
+    model->updateChatMessage(ID, mess);
 }
 
 
@@ -34,9 +34,9 @@ void ChatsFilterProxyModel::clearChatUnread(const QString& ID)
 }
 
 
-void ChatsFilterProxyModel::loadChatList()    //заглушка
+void ChatsFilterProxyModel::loadChatList(QHash<QString, ModelsElements::ChatData> &chatList)
 {
-    model->loadChatList();
+    model->loadChatList(chatList);
 }
 
 
@@ -51,7 +51,7 @@ bool ChatsFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &s
 {
     if (!currentFilter.isEmpty())
     {
-        if (model->data(model->index(sourceRow, 0, sourceParent), ChatsModel::ChatDataRoles::name).toString().startsWith(currentFilter, Qt::CaseInsensitive))
+        if (model->data(model->index(sourceRow, 0, sourceParent), ChatsModel::ChatDataRoles::Name).toString().startsWith(currentFilter, Qt::CaseInsensitive))
             return true;
     }
     else
@@ -63,7 +63,7 @@ bool ChatsFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &s
 
 bool ChatsFilterProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
 {
-    if (model->data(left, ChatsModel::ChatDataRoles::lastMessageTime).toString() > model->data(right, ChatsModel::ChatDataRoles::lastMessageTime).toString())
+    if (model->data(left, ChatsModel::ChatDataRoles::LastMessageTime).toString() > model->data(right, ChatsModel::ChatDataRoles::LastMessageTime).toString())
         return true;
 
     return false;

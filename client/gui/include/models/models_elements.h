@@ -9,7 +9,7 @@ namespace ModelsElements {
     struct MessageData
     {
         MessageData(){}
-        MessageData(const QString &messGuid, const QString messText, const QString messTime);
+        MessageData(const QString &chatID, const QString &messGuid, const QString &messText, const QString &messTime);
 
         QVariant fromUuid;
         QVariant chatUuid;
@@ -37,7 +37,7 @@ namespace ModelsElements {
 
     struct ContactData
     {
-        ContactData(){}
+        ContactData(){uuid = QVariant(QString("null"));}
         ContactData(const QString &userUuid, const QString &userName, const QString &userAvatar = QString());
 
         QVariant uuid;

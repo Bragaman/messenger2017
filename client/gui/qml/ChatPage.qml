@@ -1,9 +1,16 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
+import Controler.Message 1.0
 
 Page {
     id: chatPage
+
+    MessagesControler{
+        id: messagesControler
+
+        onNewMessage: {}
+    }
 
     ColumnLayout {
         anchors.fill: parent
@@ -90,9 +97,7 @@ Page {
             displayMarginBeginning: 40
             displayMarginEnd: 40
 
-            model: ChatMessagesModel {
-                id: messages
-            }
+            model: messagesModel
         }
 
         //////////////////////////////////////////////////////////////////////
@@ -176,11 +181,8 @@ Page {
                     }
 
                     onClicked: {
-                        messages.append({
-                                            guid: 1,
-                                            messText: chatMessageField.text,
-                                            messTime: "18:00"
-                                        })
+                        //TODO:перекинуть на хендлер
+                        messagesControler.sendNewMessage(chatMessageField.text)
                         chatListView.positionViewAtEnd()
                         chatMessageField.clear()
                     }

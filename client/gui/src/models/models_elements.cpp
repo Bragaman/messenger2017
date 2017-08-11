@@ -3,8 +3,9 @@
 using namespace ModelsElements;
 
 
-MessageData::MessageData(const QString &messGuid, const QString messText, const QString messTime) :
+MessageData::MessageData(const QString &chatID, const QString &messGuid, const QString &messText, const QString &messTime) :
     fromUuid(messGuid),
+    chatUuid(chatID),
     messText(messText),
     messTime(messTime)
 {}

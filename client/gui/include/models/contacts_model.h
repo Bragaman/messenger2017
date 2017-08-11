@@ -3,6 +3,8 @@
 
 #include <QAbstractListModel>
 #include <QHash>
+#include <QtQml>
+
 
 #include "include/models/models_elements.h"
 
@@ -14,19 +16,24 @@ class ContactsModel : public QAbstractListModel
 public:
     enum ContactDataRoles
     {
-        uuid = Qt::UserRole + 1,
-        name,
-        avatar
+        Uuid = Qt::UserRole + 1,
+        Name,
+        Avatar
     };
+    Q_ENUMS(ContactDataRoles)
 
     ContactsModel(QObject* parent = 0);
 
-    Q_INVOKABLE void loadContactList(); //TODO: заглушка
-    Q_INVOKABLE const ModelsElements::ContactData getContactByID(const QString &ID);
+    void loadContactList(); //TODO: заглушка
+    ModelsElements::ContactData *getContactByID(const QString &ID);
+
+    Q_INVOKABLE QVariant getDataForID(const QString &ID, const int role);
 
     virtual int rowCount(const QModelIndex &parent) const;
     virtual QVariant data(const QModelIndex &index, int role) const;
     virtual QHash<int, QByteArray> roleNames() const;
+
+    static void declareQML();
 
 private:
     QHash <QString, ModelsElements::ContactData> contacts;
