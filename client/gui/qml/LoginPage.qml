@@ -13,7 +13,7 @@ PageWithLogo {
             loginPage.state = "error"
         }
         onFinishLoginSuccessed: {
-            root.state = "base state"
+            loginPage.state = "base state"
             stackView.push("qrc:/qml/MainPage.qml")
         }
 

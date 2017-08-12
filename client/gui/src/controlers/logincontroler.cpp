@@ -22,6 +22,7 @@ void LoginControler::login() const
 {
     emit startLogin();
     //TODO call core func
+    emit finishLoginSuccessed();
 }
 
 void LoginControler::loginSuccessed(const std::string &guid)
