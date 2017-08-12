@@ -170,6 +170,7 @@ Page {
                     TextArea {
                         id: chatMessageField
                         selectByMouse: true
+                        color: Style.textColor
 
                         wrapMode: TextEdit.Wrap
                         renderType: Text.NativeRendering

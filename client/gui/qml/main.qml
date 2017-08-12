@@ -5,6 +5,7 @@ import QtQuick.Layouts 1.3
 ApplicationWindow {
     id: window
     visible: true
+    title: qsTr("Messenger 2017")
 
     StackView {
         id: stackView

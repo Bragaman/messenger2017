@@ -29,6 +29,7 @@ Page {
         ContactWidget {
             id: contacts
             width: 300
+            z: -1
             anchors.top: split_left.bottom
             height: parent.height - info.height - 1
         }
