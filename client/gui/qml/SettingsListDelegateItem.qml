@@ -64,15 +64,7 @@ Component {
             id: listViewMouseArea
             anchors.fill: parent
             onClicked: {
-
-                // Switch to details view
-                //                listView.currentIndex = index
-                //                detailViewImage.source = photo
-                //                detailViewName.text = name
-                //                detailViewNumber.text = number
-                //                detailListView.switchState()
-                //                Style.whitestyle = !Style.whitestyle
-                rightside.push("qrc:/qml/SettingsPage.qml")
+//                rightside.push("qrc:/qml/SettingsPage.qml")
             }
         }
     }

@@ -33,6 +33,7 @@ Page {
             anchors.top: split_left.bottom
             height: parent.height - info.height - 1
         }
+
         SettingsPage {
             id: settings
             z: -1
@@ -98,5 +99,10 @@ Page {
 
     AddDialog {
         id: adding
+        //anchors.fill: mainpage
+
+        onAddNewChat: {
+            contacts.addNewChat(uuid)
+        }
     }
 }
