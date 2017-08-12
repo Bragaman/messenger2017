@@ -47,7 +47,7 @@ RowLayout {
 
             Text {
                 id: itemTime
-                text: model.messTime
+                text: model.MessTime
                 color: Style.chatTime
             }
         }
@@ -57,7 +57,7 @@ RowLayout {
             property real maxLen: delegateItem.width - itemIcon.width
                                   - delegateItem.spacing - 4 - padding * 2
             id: msgLabel
-            text: model.messText
+            text: model.MessText
             color: sentByMe ?  Style.myMessageColor : Style.otherMessageColor
             wrapMode: Label.WrapAnywhere
             padding: 5
