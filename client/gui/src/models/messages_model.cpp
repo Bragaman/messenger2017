@@ -1,65 +1,48 @@
 #include "include/models/messages_model.h"
 
+#include <QDebug>
 using namespace ModelsElements;
 
 
 MessagesModel::MessagesModel(QObject *parent) : QAbstractListModel(parent)
 {
-    //TODO: заглушка
-
-    itemList.append(MessageData(
-                        "1",
-                        "Eba?",
-                        "10:00"
-                        ));
-
-    itemList.append(MessageData(
-                        "0",
-                        "Eba",
-                        "10:10"
-                        ));
-
-    itemList.append(MessageData(
-                        "1",
-                        "Eba?1",
-                        "11:00"
-                        ));
-
-    itemList.append(MessageData(
-                        "1",
-                        "Eba?2",
-                        "12:00"
-                        ));
-
-    itemList.append(MessageData(
-                        "0",
-                        "Eba?0",
-                        "13:00"
-                        ));
-
-    itemList.append(MessageData(
-                        "0",
-                        "Eba?12",
-                        "14:00"
-                        ));
-
-    itemList.append(MessageData(
-                        "1",
-                        "Eba?14",
-                        "15:00"
-                        ));
+    qDebug()<<"create MessagesModel";
 }
 
 
-void MessagesModel::addMessage(MessageData mess)
+MessagesModel::~MessagesModel()
 {
+    qDebug()<<"delete MessagesModel";
+}
+
+
+void MessagesModel::addMessage(const MessageData &mess)
+{
+    beginInsertRows(QModelIndex(), itemList.size(), itemList.size());
+
     itemList.append(mess);
+
+    endInsertRows();
+
+    QModelIndex index = createIndex(itemList.size(), itemList.size(), static_cast<void *>(0));
+    emit dataChanged(index, index);
 }
 
 
 void MessagesModel::loadMessageHistory()
 {
+    // добавляем в модель новые данные
+}
 
+
+void MessagesModel::cleanChat()
+{
+    beginRemoveRows(QModelIndex(), 0, itemList.size() - 1);
+    itemList.clear();
+    endRemoveRows();
+
+    QModelIndex index = createIndex(0, 0, static_cast<void *>(0));
+    emit dataChanged(index, index);
 }
 
 
@@ -75,13 +58,13 @@ QVariant MessagesModel::data(const QModelIndex &index, int role) const
     if (index.isValid())
     {
         switch (role) {
-        case MessageDataRole::fromUuid:
+        case MessageDataRole::FromUuid:
             return itemList[index.row()].fromUuid;
-        case MessageDataRole::chatUuid:
+        case MessageDataRole::ChatUuid:
             return itemList[index.row()].chatUuid;
-        case MessageDataRole::messText:
+        case MessageDataRole::MessText:
             return itemList[index.row()].messText;
-        case MessageDataRole::messTime:
+        case MessageDataRole::MessTime:
             return itemList[index.row()].messTime;
         }
     }
@@ -95,22 +78,22 @@ bool MessagesModel::setData(const QModelIndex &index, const QVariant &value, int
     {
         switch (role)
         {
-            case MessageDataRole::fromUuid:
+            case MessageDataRole::FromUuid:
             {
                 itemList[index.row()].fromUuid = value;
                 break;
             }
-            case MessageDataRole::chatUuid:
+            case MessageDataRole::ChatUuid:
             {
                 itemList[index.row()].chatUuid = value;
                 break;
             }
-            case MessageDataRole::messText:
+            case MessageDataRole::MessText:
             {
                 itemList[index.row()].messText = value;
                 break;
             }
-            case MessageDataRole::messTime:
+            case MessageDataRole::MessTime:
             {
                 itemList[index.row()].messTime = value;
                 break;
@@ -128,10 +111,10 @@ QHash<int, QByteArray> MessagesModel::roleNames() const
 {
     QHash<int, QByteArray> roles = QAbstractListModel::roleNames();
 
-    roles[fromUuid] = "fromUuid";
-    roles[chatUuid] = "chatUuid";
-    roles[messText] = "messText";
-    roles[messTime] = "messTime";
+    roles[FromUuid] = "FromUuid";
+    roles[ChatUuid] = "ChatUuid";
+    roles[MessText] = "MessText";
+    roles[MessTime] = "MessTime";
 
     return roles;
 }

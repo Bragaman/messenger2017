@@ -9,17 +9,18 @@ class MessagesModel : public QAbstractListModel
 {
 public:
     MessagesModel(QObject* parent = 0);
+    ~MessagesModel();
 
     enum MessageDataRole {
-        fromUuid = Qt::UserRole + 1,
-        chatUuid,
-        messText,
-        messTime
+        FromUuid = Qt::UserRole + 1,
+        ChatUuid,
+        MessText,
+        MessTime
     };
 
-    Q_INVOKABLE void addMessage(ModelsElements::MessageData mess);
-    Q_INVOKABLE void loadMessageHistory();  //TODO: заглушка
-    Q_INVOKABLE void setMessageState();     //TODO: заглушка
+    void addMessage(const ModelsElements::MessageData &mess);
+    void loadMessageHistory();  //TODO: заглушка
+    void cleanChat();
 
     virtual int rowCount(const QModelIndex &parent) const;
     virtual QVariant data(const QModelIndex &index, int role) const;

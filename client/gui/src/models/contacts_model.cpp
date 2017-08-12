@@ -1,26 +1,53 @@
 #include "include/models/contacts_model.h"
+#include <include/guiadapter.h>
+
+#include <QDebug>
 
 using namespace ModelsElements;
-
+using namespace m2::gui::controler;
 
 ContactsModel::ContactsModel(QObject *parent) : QAbstractListModel(parent)
 {
-
 }
 
 
-void ContactsModel::loadContactList() //TODO: заглушка
+void ContactsModel::declareQML()
 {
-
+    qmlRegisterUncreatableType<ContactsModel>("ContactsModel", 1, 0, "ContactsModel", "none");
 }
 
 
-const ContactData ContactsModel::getContactByID(const QString &ID)
+void ContactsModel::loadContactList(QHash<QString, ContactData> &contactList)
+{
+    contacts = contactList;
+}
+
+
+ContactData* ContactsModel::getContactByID(const QString &ID)
 {
     if (contacts.contains(ID))
-        return contacts[ID];
+        return &contacts[ID];
 
-    return ContactData();
+    return nullptr;
+}
+
+
+QVariant ContactsModel::getDataForID(const QString &ID, const int role)
+{
+    ContactData* elem = getContactByID(ID);
+    if (elem != nullptr)
+    {
+        switch (role) {
+        case ContactDataRoles::Uuid:
+            return elem->uuid;
+        case ContactDataRoles::Name:
+            return elem->name;
+        case ContactDataRoles::Avatar:
+            return elem->avatar;
+        }
+    }
+
+    return QVariant();
 }
 
 
@@ -38,11 +65,11 @@ QVariant ContactsModel::data(const QModelIndex &index, int role) const
         QHash<QString, ContactData>::const_iterator iter = contacts.constBegin() + index.row();
 
         switch (role) {
-        case ContactDataRoles::uuid:
+        case ContactDataRoles::Uuid:
             return iter.value().uuid;
-        case ContactDataRoles::name:
+        case ContactDataRoles::Name:
             return iter.value().name;
-        case ContactDataRoles::avatar:
+        case ContactDataRoles::Avatar:
             return iter.value().avatar;
         }
     }
@@ -54,9 +81,9 @@ QHash<int, QByteArray> ContactsModel::roleNames() const
 {
     QHash<int, QByteArray> roles = QAbstractListModel::roleNames();
 
-    roles[uuid] = "uuid";
-    roles[name] = "name";
-    roles[avatar] = "avatar";
+    roles[Uuid] = "Uuid";
+    roles[Name] = "Name";
+    roles[Avatar] = "Avatar";
 
     return roles;
 }
