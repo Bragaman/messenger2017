@@ -80,6 +80,8 @@ Component {
 
                                 renderType: Text.NativeRendering
                                 font.pixelSize: 14
+                                Layout.maximumWidth: rowcontact.width - rowcontact.spacing - lastName.width
+                                maximumLineCount: 1
                                 elide: Text.ElideRight
 
 

@@ -97,6 +97,10 @@ Page {
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                     }
+
+                    ToolTip.visible: hovered
+                    ToolTip.text: qsTr("Coming soon...")
+
                 }
             }
             Rectangle {
