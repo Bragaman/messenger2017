@@ -15,7 +15,6 @@
 #include <include/guiadapter.h>
 
 
-
 using namespace m2::gui::controler;
 
 int main(int argc, char *argv[])

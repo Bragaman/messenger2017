@@ -10,12 +10,6 @@ ChatsFilterProxyModel::ChatsFilterProxyModel(QObject* parent) : QSortFilterProxy
 }
 
 
-void ChatsFilterProxyModel::addNewChat(const QString &ID, const QString &Name, QString Avatar)
-{
-    model->addNewChat(ID, Name, Avatar);
-}
-
-
 void ChatsFilterProxyModel::addNewChat(const ChatData &chat)
 {
     model->addNewChat(chat);

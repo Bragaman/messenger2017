@@ -6,7 +6,6 @@ using namespace ModelsElements;
 
 ChatsModel::ChatsModel(QObject *parent) : QAbstractListModel(parent)
 {
-
 }
 
 
@@ -120,22 +119,6 @@ ChatData *ChatsModel::getChatByID(const QString& ID)
 }
 
 
-void ChatsModel::addNewChat(const QString& ID, const QString &name, QString avatar)
-{
-    beginInsertRows(QModelIndex(), itemList.size(), itemList.size());
-
-    itemList.insert(ID ,
-                    ChatData(
-                        ID,
-                        MessageData(),
-                        name,
-                        avatar,
-                        0));
-
-    endInsertRows();
-}
-
-
 void ChatsModel::addNewChat(const ChatData &chat)
 {
     beginInsertRows(QModelIndex(), itemList.size(), itemList.size());
@@ -143,4 +126,6 @@ void ChatsModel::addNewChat(const ChatData &chat)
     itemList.insert(chat.chatID.toString(), chat);
 
     endInsertRows();
+
+    emit dataChanged(index(0,0), index(itemList.size() - 1,0));
 }

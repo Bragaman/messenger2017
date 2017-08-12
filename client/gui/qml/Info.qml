@@ -88,7 +88,7 @@ Page {
                 setimg.source = "/img/chats.png"
             }
 
-            //            rightside.push("qrc:/qml/SettingsPage.qml")
+            //rightside.push("qrc:/qml/SettingsPage.qml")
         }
     }
 }

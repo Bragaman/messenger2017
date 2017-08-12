@@ -89,7 +89,7 @@ public slots:
     ///for messages
     void sendMessage(const ModelsElements::MessageData &message);
     void loadChatHistory();
-    void uploadChatHistory() const;
+    void uploadChatHistory();
 
 
     ///fot messages callbacks
@@ -135,7 +135,6 @@ signals:
     void registrationFailed(const QString msg);
 
     void chatsLoaded(QHash<QString, ModelsElements::ChatData>);
-    void contactsLoaded(QHash <QString, ModelsElements::ContactData>);
 
 private:
     GuiAdapter();

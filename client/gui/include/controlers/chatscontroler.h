@@ -22,7 +22,7 @@ public:
 
 public slots:
     void newMessage(ModelsElements::MessageData message);
-    void newChat(ModelsElements::ChatData chat);
+    void newChat(const ModelsElements::ChatData &chat);
     void chatsLoaded(QHash<QString, ModelsElements::ChatData> chats);
 
 private:

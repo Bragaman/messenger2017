@@ -27,9 +27,6 @@ GuiAdapter::GuiAdapter()
     ///заглушка
     myUuid = "1";
     currentChatID = "0";
-
-    /// Иисусий костыль
-    loadContacts();
 }
 
 
@@ -132,6 +129,8 @@ void GuiAdapter::loginToServerCallback()
     connect(timer, SIGNAL(timeout()), this, SIGNAL(loginSuccessed()));
     connect(timer, SIGNAL(timeout()), timer, SLOT(deleteLater()));
     timer->start(2000);
+
+    loadContacts();
 }
 
 
@@ -183,7 +182,7 @@ void GuiAdapter::loadChatHistory()
 }
 
 
-void GuiAdapter::uploadChatHistory() const
+void GuiAdapter::uploadChatHistory()
 {
     ///здесь мы запрашиваем следующий кусок истории диалога
 }
@@ -223,6 +222,8 @@ void GuiAdapter::createChat(const QString &uuid)
 {
     /// кинем ядру запрос на новый диалог
     /// вообще по идее эта функция должна возвращать результат добавления
+    qDebug()<<uuid;
+    emit newChat(ChatData(uuid, MessageData(), QString("New Eba")));
 }
 
 

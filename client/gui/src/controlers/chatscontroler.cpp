@@ -42,7 +42,7 @@ void ChatsControler::changeCurrentChat(const int &index)
 
 void ChatsControler::addNewChat(const QString &uuid)
 {
-
+    adapter->createChat(uuid);
 }
 
 
@@ -52,9 +52,9 @@ void ChatsControler::newMessage(MessageData message)
 }
 
 
-void ChatsControler::newChat(ChatData chat)
+void ChatsControler::newChat(const ChatData &chat)
 {
-
+    chatsModel->addNewChat(chat);
 }
 
 

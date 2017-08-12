@@ -22,7 +22,7 @@ namespace ModelsElements {
     struct ChatData
     {
         ChatData(){}
-        ChatData(const QString &ID, const MessageData &mess, const QString &chatName, QString chatAvatar, int chatUnreadable = 0);
+        ChatData(const QString &ID, const MessageData &mess, const QString &chatName, QString chatAvatar = 0, int chatUnreadable = 0);
 
         void setLastMessage(MessageData mess);
 

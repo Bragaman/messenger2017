@@ -13,7 +13,6 @@ class ChatsFilterProxyModel : public QSortFilterProxyModel
 public:
     ChatsFilterProxyModel(QObject* parent = 0);
 
-    void addNewChat(const QString& ID, const QString &Name, QString Avatar = QString());
     void addNewChat(const ModelsElements::ChatData &chat);
     void deleteChat(const QString& ID);
     void updateChat(const ModelsElements::MessageData mess);

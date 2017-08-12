@@ -8,6 +8,8 @@ Rectangle {
     anchors.fill: parent
     state: "Invisible"
 
+    signal addNewChat(string uuid)
+
     states: [
         State {
             name: "Visible"
@@ -161,7 +163,7 @@ Rectangle {
             }
 
             onClicked: {
-                console.log("adding user " + guid_textField.text)
+                adding.addNewChat(guid_textField.text)
             }
         }
 

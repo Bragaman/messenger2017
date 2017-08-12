@@ -2,7 +2,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Styles 1.4
 import QtGraphicalEffects 1.0
-
+import "."
 import Controler.Chats 1.0
 
 Rectangle {
@@ -13,6 +13,11 @@ Rectangle {
 
     ChatsControler{
         id: chatsControler
+    }
+
+
+    function addNewChat(uuid){
+        chatsControler.addNewChat(uuid)
     }
 
 
