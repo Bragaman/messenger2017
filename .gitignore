@@ -3,3 +3,4 @@
 *.pro
 *.autosave
 /server-build/
+client/gui/ebatest.pro.user

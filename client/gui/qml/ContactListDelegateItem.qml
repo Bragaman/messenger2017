@@ -1,6 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
+import ContactsModel 1.0
 import "."
 
 // list delegate
@@ -14,7 +15,7 @@ Component {
         state: "Normal"
 
         //for filtering
-        visible: RegExp(searchText.text, "i").test(name)
+        visible: RegExp(searchText.text, "i").test(Name)
         height: visible ? 50 : 0
 
         // item view
@@ -33,8 +34,7 @@ Component {
                         Layout.margins: 5
 
                         fillMode: Image.PreserveAspectFit
-
-                        source: icon
+                        source: Avatar
                     }
 
                     ColumnLayout {
@@ -49,8 +49,7 @@ Component {
                                 font.pixelSize: 14
                                 font.bold: true
                                 elide: "ElideRight"
-
-                                text: name
+                                text: Name
                                 color: Style.contactTextColor
                             }
                             Text {
@@ -62,7 +61,7 @@ Component {
 
                                 horizontalAlignment: Text.AlignRight
 
-                                text: lastMessageTime == undefined ? "" : lastMessageTime
+                                text: LastMessageTime == undefined ? "" : LastMessageTime
                                 color: Style.contactSubText
                             }
                         }
@@ -72,10 +71,9 @@ Component {
 
                                 renderType: Text.NativeRendering
                                 font.pixelSize: 14
-                                text: lastMessageName == undefined ? "" : lastMessageName + ":"
+                                text: contactsModel.getDataForID(LastMessageGuid, ContactsModel.Name) == undefined ? "" : contactsModel.getDataForID(LastMessageGuid, ContactsModel.Name) + ":"
                                 color: Style.contactTextColor
-
-                                visible: lastMessageName == undefined ? false : true
+                                visible: contactsModel.getDataForID(LastMessageGuid, ContactsModel.Name)  == undefined ? false : true
                             }
                             Text {
                                 id: lastText
@@ -84,7 +82,8 @@ Component {
                                 font.pixelSize: 14
                                 elide: Text.ElideRight
 
-                                text: lastMessageText == undefined ? "Нет сообщений" : lastMessageText
+
+                                text: LastMessageText == undefined ? "Нет сообщений" : LastMessageText
                                 color: Style.contactSubText
                             }
                         }
@@ -161,8 +160,6 @@ Component {
             }
 
             onClicked: {
-                rightside.pop()
-                rightside.pushNoAnimation(["qrc:/qml/ChatPage.qml"])
                 listView.currentIndex = index
             }
         }

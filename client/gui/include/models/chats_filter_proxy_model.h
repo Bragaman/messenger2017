@@ -13,14 +13,16 @@ class ChatsFilterProxyModel : public QSortFilterProxyModel
 public:
     ChatsFilterProxyModel(QObject* parent = 0);
 
-    Q_INVOKABLE void addNewChat();  //TODO: заглушка
-    Q_INVOKABLE void deleteChat(const QString& ID);
-    Q_INVOKABLE void updateChat(const QString& ID, const ModelsElements::MessageData mess);
-    Q_INVOKABLE void clearChatUnread(const QString& ID);
-    Q_INVOKABLE void loadChatList();    //TODO: заглушка
+    void addNewChat(const ModelsElements::ChatData &chat);
+    void deleteChat(const QString& ID);
+    void updateChat(const ModelsElements::MessageData mess);
+    void clearChatUnread(const QString& ID);
+    void loadChatList(QHash<QString, ModelsElements::ChatData> &chatList);    //TODO: заглушка
 
+    QString getChatName(const QString &ID);
+    QString getChatAvatar(const QString &ID);
 
-    Q_INVOKABLE void setNameFilter(const QString &nameFilter);
+    void setNameFilter(const QString &nameFilter);
 
     bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const;
     bool lessThan(const QModelIndex &left, const QModelIndex &right) const;

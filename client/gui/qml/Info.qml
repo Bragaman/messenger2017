@@ -87,8 +87,6 @@ Page {
                 settings.visible = true
                 setimg.source = "/img/chats.png"
             }
-
-            //            rightside.push("qrc:/qml/SettingsPage.qml")
         }
     }
 }

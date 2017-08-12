@@ -2,10 +2,23 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Styles 1.4
 import QtGraphicalEffects 1.0
+import "."
+import Controler.Chats 1.0
+
 
 Rectangle {
+    id: contactWidget
     antialiasing: false
     color: Style.mainBackground
+
+    ChatsControler{
+        id: chatsControler
+    }
+
+
+    function addNewChat(uuid){
+        chatsControler.addNewChat(uuid)
+    }
 
     //top rect
     Rectangle {
@@ -69,10 +82,20 @@ Rectangle {
         height: parent.height - 40
 
         anchors.top: searchline.bottom
-        model: ContactWidgetModel {
-        }
-        delegate: ContactListDelegateItem {
-        }
+        model: chatModel
+        delegate: ContactListDelegateItem {}
         currentIndex: -1
+
+        onCurrentIndexChanged: {
+            chatsControler.changeCurrentChat(listView.currentIndex)
+        }
+    }
+
+    Component.onCompleted: {
+        if (chatModel.rowCount() !== 0)
+        {
+            listView.currentIndex = 0;
+            rightside.pushNoAnimation(["qrc:/qml/ChatPage.qml"])
+        }
     }
 }
