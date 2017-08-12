@@ -82,12 +82,12 @@ public slots:
     void loginToServer();
     void loginToServerCallback();
 
-    void registerToServer(const int &serverIndex);
+    void registerToServer(const QString &server);
     void registerToServerCallback();
 
 
     ///for messages
-    void sendMessage(ModelsElements::MessageData) const;
+    void sendMessage(const ModelsElements::MessageData &message);
     void loadChatHistory();
     void uploadChatHistory() const;
 
@@ -98,11 +98,10 @@ public slots:
     void uploadChatHistoryCallback(std::vector<ebucheeYadro::Message>);
 
 
-
     ///for chats
     void deleteChat(const QString &chatID);
     void createChat(const QString &uuid);
-    QHash<QString, ModelsElements::ChatData> loadChats();
+    void loadChats();
 
 
     ///for chats callbacks
@@ -111,12 +110,15 @@ public slots:
 
 
     ///for contacts
-    QHash<QString, ModelsElements::ContactData> loadContacts();
+    void loadContacts();
 
 
     ///for contacts callbacks
     void loadContactsCallback(std::unordered_map <std::string, ebucheeYadro::Contact> contactsTable);
 
+
+    QString getCurrentChatName();
+    QString getCurrentChatAvatar();
 
 signals:
     void messagesLoaded(QVector<ModelsElements::MessageData>);
@@ -132,6 +134,8 @@ signals:
     void registrationSuccessed();
     void registrationFailed(const QString msg);
 
+    void chatsLoaded(QHash<QString, ModelsElements::ChatData>);
+    void contactsLoaded(QHash <QString, ModelsElements::ContactData>);
 
 private:
     GuiAdapter();

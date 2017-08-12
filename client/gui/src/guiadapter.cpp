@@ -19,19 +19,22 @@ GuiAdapter* GuiAdapter::getGuiAdapter()
 
 GuiAdapter::GuiAdapter()
 {
-    messages = new MessagesModel();
-    chats = new ChatsFilterProxyModel();
-    contacts = new ContactsModel();
+    messages = new MessagesModel(this);
+    chats = new ChatsFilterProxyModel(this);
+    contacts = new ContactsModel(this);
     qDebug()<<"create gui adapter";
+
+    ///заглушка
+    myUuid = "1";
+    currentChatID = "0";
+
+    /// Иисусий костыль
+    loadContacts();
 }
 
 
 GuiAdapter::~GuiAdapter()
 {
-    delete messages;
-    delete chats;
-    delete contacts;
-
     qDebug()<<"delete guiadapter";
 }
 
@@ -132,8 +135,9 @@ void GuiAdapter::loginToServerCallback()
 }
 
 
-void GuiAdapter::registerToServer(const int &serverIndex)
+void GuiAdapter::registerToServer(const QString &server)
 {
+    qDebug()<<server;
     registerToServerCallback();
 }
 
@@ -149,9 +153,9 @@ void GuiAdapter::registerToServerCallback()
 
 
 
-void GuiAdapter::sendMessage(ModelsElements::MessageData) const
+void GuiAdapter::sendMessage(const ModelsElements::MessageData &message)
 {
-
+    emit newMessage(message);
 }
 
 
@@ -163,7 +167,7 @@ void GuiAdapter::loadChatHistory()
     QVector<ModelsElements::MessageData> messList;
 
     /// а здесь пока побудет заглушка
-    if(currentChatID == 0)
+    if(currentChatID == "0")
     {
         messList.append(MessageData("0", "0", "Eba eto ya", "17:00"));
         messList.append(MessageData("0", "1", "Da", "18:00"));
@@ -172,6 +176,7 @@ void GuiAdapter::loadChatHistory()
     {
         messList.append(MessageData("1", "0", "Eba eto ti", "19:00"));
         messList.append(MessageData("1", "1", "Net, Eba eto ti", "20:00"));
+        messList.append(MessageData("1", "0", "Nu blya", "21:00"));
     }
 
     emit messagesLoaded(messList);
@@ -221,7 +226,7 @@ void GuiAdapter::createChat(const QString &uuid)
 }
 
 
-QHash<QString, ModelsElements::ChatData> GuiAdapter::loadChats()
+void GuiAdapter::loadChats()
 {
     /// кидаем ядру запрос на список диалогов
     /// кастуем в наши структуры
@@ -231,13 +236,13 @@ QHash<QString, ModelsElements::ChatData> GuiAdapter::loadChats()
     QHash<QString, ModelsElements::ChatData> chatList;
     chatList.insert("0", ChatData("0",
                                   MessageData("0", "0", "Eba eto ya", "17:00"),
-                                  "Eba1", "", 1));
+                                  "Eba1", "/demo/dsa.jpg", 1));
 
-    chatList.insert("0", ChatData("1",
+    chatList.insert("1", ChatData("1",
                                   MessageData("0", "0", "Eba eto ti", "19:00"),
-                                  "Eba2", "", 1));
+                                  "Eba2", "/demo/asd.jpg", 1));
 
-    return chatList;
+    emit chatsLoaded(chatList);
 }
 
 
@@ -253,22 +258,34 @@ void GuiAdapter::loadChatsCallback(std::unordered_map <std::string, ebucheeYadro
 }
 
 
-QHash<QString, ModelsElements::ContactData> GuiAdapter::loadContacts()
+void GuiAdapter::loadContacts()
 {
     /// подтянем список контактов, кастанем и вернем
     /// список контактов так же содержит нас самих
 
     QHash<QString, ModelsElements::ContactData> contactList;
-    contactList.insert("0", ContactData("0", "Ne Eba", "/demo/dsa.jpg"));
-    contactList.insert("1", ContactData("1", "Eba", "/demo/asd.jpg"));
+    contactList.insert("1", ContactData("1", "me", "/demo/dsa.jpg"));
+    contactList.insert("0", ContactData("0", "Eba", "/demo/asd.jpg"));
 
-    return contactList;
+    contacts->loadContactList(contactList);
 }
 
 
 void GuiAdapter::loadContactsCallback(std::unordered_map<std::string, ebucheeYadro::Contact> contactsTable)
 {
     ///коллбек для загрузки списка контактов
+}
+
+
+QString GuiAdapter::getCurrentChatName()
+{
+    return chats->getChatName(currentChatID);
+}
+
+
+QString GuiAdapter::getCurrentChatAvatar()
+{
+    return chats->getChatAvatar(currentChatID);
 }
 
 

@@ -6,6 +6,7 @@
 #include <include/controlers/registrationcontroler.h>
 #include <include/controlers/logincontroler.h>
 #include <include/controlers/messagescontroler.h>
+#include <include/controlers/chatscontroler.h>
 
 
 #include <include/models/chats_filter_proxy_model.h>
@@ -25,9 +26,9 @@ int main(int argc, char *argv[])
     LoginControler::declareQML();
     RegistrationControler::declareQML();
     MessagesControler::declareQML();
-    ContactsModel::declareQML();
+    ChatsControler::declareQML();
 
-    GuiAdapter* adapter = GuiAdapter::getGuiAdapter();
+    ContactsModel::declareQML();
 
     QQmlApplicationEngine engine;
 
