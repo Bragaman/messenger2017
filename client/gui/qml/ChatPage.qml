@@ -1,9 +1,13 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
+import QtGraphicalEffects 1.0
 
 Page {
     id: chatPage
+    background: Rectangle {
+        color: Style.mainBackground
+    }
 
     ColumnLayout {
         anchors.fill: parent
@@ -12,6 +16,10 @@ Page {
             Layout.preferredHeight: 75
             Layout.fillWidth: true
             z: 2
+
+            background: Rectangle {
+                color: Style.mainBackground
+            }
 
             RowLayout {
                 id: topLayout
@@ -44,6 +52,7 @@ Page {
                     Layout.maximumHeight: 50
 
                     text: "Eba"
+                    color: Style.textColor
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignLeft
 
@@ -63,25 +72,30 @@ Page {
 
                     background: Rectangle {
                         radius: 10
-                        color: parent.hovered ? "#a0dea0" : "white"
+                        color: parent.hovered ? Style.hover : Style.mainBackground
                     }
 
-                    text: "⋮"
-                    font.pixelSize: 22
-                    font.bold: true
+                    contentItem: Text {
+                        text: "⋮"
+                        color: Style.buttonColor
+                        font.pixelSize: 22
+                        font.bold: true
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
                 }
             }
             Rectangle {
                 id: split_right_chat
-                color: "lightGray"
+                color: Style.splitColor
                 height: 1
                 width: parent.width
                 anchors.top: topLayout.bottom
             }
         }
 
-        /////////////////////////////////////////////////////////////////////
 
+        /////////////////////////////////////////////////////////////////////
         ChatListView {
             id: chatListView
 
@@ -95,11 +109,11 @@ Page {
             }
         }
 
-        //////////////////////////////////////////////////////////////////////
 
+        //////////////////////////////////////////////////////////////////////
         Rectangle {
             id: split_footer_chat
-            color: "lightGray"
+            color: Style.splitColor
             height: 1
             Layout.fillWidth: true
             anchors.bottom: footer_chat.top
@@ -108,6 +122,10 @@ Page {
         Page {
             id: footer_chat
             Layout.fillWidth: true
+
+            background: Rectangle {
+                color: Style.mainBackground
+            }
 
             RowLayout {
                 id: bottomLayout
@@ -127,12 +145,18 @@ Page {
                     background: Rectangle {
                         radius: 10
 
-                        color: parent.hovered ? "#a0dea0" : "white"
+                        color: parent.hovered ? Style.hover : Style.mainBackground
                     }
 
                     contentItem: Image {
                         id: affiximg
                         source: "/img/affix.png"
+                    }
+
+                    ColorOverlay {
+                        anchors.fill: affiximg
+                        source: affiximg
+                        color: Style.buttonColor
                     }
                 }
 
@@ -167,12 +191,18 @@ Page {
                     background: Rectangle {
                         radius: 10
 
-                        color: parent.hovered ? "#a0dea0" : "white"
+                        color: parent.hovered ? Style.hover : Style.mainBackground
                     }
 
                     contentItem: Image {
                         id: sendimg
                         source: "/img/send.png"
+                    }
+
+                    ColorOverlay {
+                        anchors.fill: sendimg
+                        source: sendimg
+                        color: Style.buttonColor
                     }
 
                     onClicked: {

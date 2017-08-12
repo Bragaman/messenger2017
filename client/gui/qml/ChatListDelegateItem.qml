@@ -1,6 +1,7 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.1
+import "."
 
 RowLayout {
     function getMsgAligment() {
@@ -39,13 +40,13 @@ RowLayout {
             Text {
                 id: itemUserName
                 text: contacts.get(model.guid).name
-                color: sentByMe ? "#9d81ba" : "red"
+                color: sentByMe ? Style.myNameColor : Style.otherNameColor
             }
 
             Text {
                 id: itemTime
                 text: model.messTime
-                color: "lightGray"
+                color: Style.chatTime
             }
         }
 
@@ -55,7 +56,7 @@ RowLayout {
                                   - delegateItem.spacing - 4 - padding * 2
             id: msgLabel
             text: model.messText
-            color: "black"
+            color: sentByMe ?  Style.myMessageColor : Style.otherMessageColor
             wrapMode: Label.WrapAnywhere
             padding: 5
 
@@ -69,9 +70,8 @@ RowLayout {
 
             background: Rectangle {
                 id: msgLabelBackground
-                color: sentByMe ? "lightblue" : "white"
-                border.width: 1
-                radius: 5
+                color: sentByMe ? Style.myMessageBackground : Style.otherMessageBackground
+                radius: 4
                 width: Math.min(msgLabel.maxLen,
                                 msgLabel.paintedWidth) + parent.padding * 2
             }
