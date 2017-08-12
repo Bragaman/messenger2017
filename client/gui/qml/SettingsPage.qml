@@ -64,7 +64,7 @@ Page {
         }
         Switch {
             id: control
-            checked: true
+            checked: Style.whitestyle
 
             onClicked: {
                 Style.whitestyle = !Style.whitestyle
