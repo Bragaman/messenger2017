@@ -2,6 +2,8 @@ import QtQuick 2.7
 import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.1
 import "."
+import ContactsModel 1.0
+
 
 RowLayout {
     function getMsgAligment() {
@@ -17,7 +19,7 @@ RowLayout {
     }
 
     id: delegateItem
-    readonly property bool sentByMe: guid == 1
+    readonly property bool sentByMe: FromUuid == "1"
     layoutDirection: getLayoutDirection()
     Layout.alignment: getMsgAligment()
     width: parent.width
@@ -29,8 +31,7 @@ RowLayout {
 
         fillMode: Image.PreserveAspectFit
         Layout.alignment: Qt.AlignTop
-        //заглушка
-        source: contacts.get(guid).avatar
+        source: contactsModel.getDataForID(FromUuid, ContactsModel.Avatar)
     }
 
     ColumnLayout {
@@ -39,7 +40,8 @@ RowLayout {
             layoutDirection: getLayoutDirection()
             Text {
                 id: itemUserName
-                text: contacts.get(model.guid).name
+
+                text: contactsModel.getDataForID(FromUuid, ContactsModel.Name)
                 color: sentByMe ? Style.myNameColor : Style.otherNameColor
             }
 

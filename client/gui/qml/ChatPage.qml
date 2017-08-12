@@ -2,12 +2,28 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
+import Controler.Message 1.0
+
 
 Page {
     id: chatPage
     background: Rectangle {
         color: Style.mainBackground
     }
+
+    MessagesControler{
+        id: messagesControler
+
+        onChatChanged: {
+            chatName.text = name
+            chatAvatar.source = avatar
+        }
+
+        Component.onCompleted: {
+            messagesControler.getChatData()
+        }
+    }
+
 
     ColumnLayout {
         anchors.fill: parent
@@ -38,7 +54,7 @@ Page {
                     fillMode: Image.PreserveAspectFit
 
                     //заглушка
-                    source: "/demo/asd.jpg"
+                    //source: "/demo/asd.jpg"
                 }
 
                 Text {
@@ -50,8 +66,6 @@ Page {
                     Layout.minimumWidth: 50
                     Layout.maximumWidth: -1
                     Layout.maximumHeight: 50
-
-                    text: "Eba"
                     color: Style.textColor
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignLeft
@@ -104,9 +118,7 @@ Page {
             displayMarginBeginning: 40
             displayMarginEnd: 40
 
-            model: ChatMessagesModel {
-                id: messages
-            }
+            model: messagesModel
         }
 
 
@@ -206,11 +218,7 @@ Page {
                     }
 
                     onClicked: {
-                        messages.append({
-                                            guid: 1,
-                                            messText: chatMessageField.text,
-                                            messTime: "18:00"
-                                        })
+                        messagesControler.sendNewMessage(chatMessageField.text)
                         chatListView.positionViewAtEnd()
                         chatMessageField.clear()
                     }

@@ -1,5 +1,5 @@
-import QtQuick 2.6
-import QtQuick.Controls 2.1
+import QtQuick 2.9
+import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import Controler.Login 1.0
 
@@ -9,9 +9,11 @@ PageWithLogo {
 
     controler:  LoginControler {
         id: loginControler
+
         onFinishLoginFailed: {
             loginPage.state = "error"
         }
+
         onFinishLoginSuccessed: {
             loginPage.state = "base state"
             stackView.push("qrc:/qml/MainPage.qml")
@@ -19,6 +21,7 @@ PageWithLogo {
 
         onStartLogin: loginPage.state = "loading"
     }
+
 
     Text {
         id: infoText
@@ -31,12 +34,14 @@ PageWithLogo {
         Layout.preferredHeight: 40
     }
 
+
     BusyIndicator {
         id: busyIndicator
         running: false
         Layout.alignment: Qt.AlignHCenter
         visible: false
     }
+
 
     Button {
         id: loginButton
@@ -47,6 +52,7 @@ PageWithLogo {
             loginControler.login()
         }
     }
+
 
     footerButton: ToolButton {
         id: toolButton
@@ -67,15 +73,18 @@ PageWithLogo {
                 running: true
             }
 
+
             PropertyChanges {
                 target: infoText
                 text: qsTr("Loading... Please wait.")
             }
 
+
             PropertyChanges {
                 target: loginButton
                 enabled: false
             }
+
 
             PropertyChanges {
                 target: toolButton
@@ -90,16 +99,19 @@ PageWithLogo {
                 visible: false
             }
 
+
             PropertyChanges {
                 target: infoText
                 color: "#8f001d"
                 text: qsTr("Some error")
             }
 
+
             PropertyChanges {
                 target: loginButton
                 enabled: true
             }
+
 
             PropertyChanges {
                 target: registerButton
